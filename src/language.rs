@@ -1,4 +1,10 @@
-use crate::{Dictionary, PartOfSpeech, Rule, Word, collections::FastMap as DefaultMap};
+use crate::{Dictionary, PartOfSpeech, Word};
+#[cfg(feature="rule")]
+use crate::Rule;
+#[cfg(feature="fastmap")]
+use crate::collections::FastMap as DefaultMap;
+#[cfg(not(feature="fastmap"))]
+use std::collections::HashMap as DefaultMap;
 
 use std::{
     hash::Hash,
@@ -156,6 +162,7 @@ pub trait LanguageBuilder<T, M=DefaultMap<T, Word>> {
 ///
 /// This configuration trait is useful for attaching sequential phonological rules 
 /// to a language constructor pipeline before generation.
+#[cfg(feature="rule")]
 pub trait WithRules {
     /// Consumes the builder state and updates it with the provided sequence of dynamic [`Rule`] transformers.
     fn rules<I>(self, rules: I) -> Self
@@ -172,7 +179,7 @@ pub trait WithSeed {
 	fn seed(self, seed: Self::Seed) -> Self;
 }
 
-/// Allows a builder to accept an explicit phonetic [`Alphabet`] specification object.
+/// Allows a builder to accept an explicit phonetic `Alphabet` specification object.
 #[cfg(feature="alphabet")]
 pub trait WithAlphabet {
     /// Configures the language builder framework to draw parameters from the given target alphabet.

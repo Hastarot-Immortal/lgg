@@ -4,8 +4,15 @@ version = "0.1.0"
 edition = "2024"
 
 [features]
-alphabet = []
+default = ["language", "rule", "fastmap"]
+sound = []
+word = ["sound"]
+rule = ["word"]
+dictionary = ["word", "dep:cc-traits"]
+fastmap = ["word", "dep:foldhash"]
+language = ["dictionary"]
+alphabet = ["sound"]
 
 [dependencies]
-cc-traits = "2.0.0"
-foldhash = "0.2.0"
+cc-traits = {version="2.0.0", optional=true}
+foldhash = {version="0.2.0", optional=true}

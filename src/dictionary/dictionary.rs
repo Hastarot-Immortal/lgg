@@ -1,7 +1,8 @@
-use crate::{
-    Word,
-    collections::FastMap,
-};
+use crate::Word;
+#[cfg(feature="fastmap")]
+use crate::collections::FastMap as DefaultMap;
+#[cfg(not(feature="fastmap"))]
+use std::collections::HashMap as DefaultMap;
 
 use std::{
     hash::Hash,
@@ -34,7 +35,7 @@ use cc_traits::{
 ///
 /// # Type Parameters
 /// * `I`: The identifier type used as a lookup key (e.g., an integer ID, or a string slice).
-/// * `M`: The underlying collection map type. Defaults to [`FastMap<I, Word>`].
+/// * `M`: The underlying collection map type. Defaults to `FastMap<I, Word>` or `HashMap<I, Word>` if feature `fastmap` isn't enable.
 /// 
 /// ```
 /// use lgg_core::{Dictionary, Word, PartOfSpeech, Sound};
@@ -47,7 +48,7 @@ use cc_traits::{
 /// assert_eq!(dict.get(&"apple".to_string()), Some(&word));
 /// ```
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Dictionary<I, M = FastMap<I, Word>> {
+pub struct Dictionary<I, M = DefaultMap<I, Word>> {
     pub(crate) words: M,
     _id_type: PhantomData<I>,
 }
@@ -66,7 +67,7 @@ where
     /// ```
     pub fn new() -> Self {
         Self { 
-            words: FastMap::new(), 
+            words: DefaultMap::new(), 
             _id_type: PhantomData
         }
     }
@@ -80,7 +81,7 @@ where
     /// ```
     pub fn with_capacity(capacity: usize) -> Self {
         Self { 
-            words: FastMap::with_capacity(capacity), 
+            words: DefaultMap::with_capacity(capacity), 
             _id_type: PhantomData
         }
     }
@@ -111,7 +112,7 @@ where
     /// ```
     pub fn from_vec(vec: Vec<(I, Word)>) -> Self {
         Self {
-            words: FastMap::from_iter(vec.into_iter()),
+            words: DefaultMap::from_iter(vec.into_iter()),
             _id_type: PhantomData
         }
     }

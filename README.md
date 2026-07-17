@@ -17,7 +17,7 @@ The framework is structured into several interconnected modules:
 
 ## Example
 
-```
+``` rust
 use lgg_core::*;
 use lgg_core::language::*;
 
@@ -139,4 +139,12 @@ fn main() {
 		println!("{}: {}", meaning, word);
 	}
 }
+```
+
+## Getting started
+
+Add to your Cargo.toml:
+``` toml
+[dependencies]
+lgg_core = { git = "https://github.com/Hastarot-Immortal/lgg-core.git", package = "lgg-core" }
 ```

@@ -143,17 +143,26 @@
 //! }
 //! ```
 
+#[cfg(feature="sound")]
 pub mod sound;
+#[cfg(feature="word")]
 pub mod word;
+#[cfg(feature="dictionary")]
 pub mod dictionary;
+#[cfg(feature="language")]
 pub mod language;
+#[cfg(feature="rule")]
 pub mod rule;
+#[cfg(feature="dictionary")]
 pub mod collections;
 #[cfg(feature="alphabet")]
 pub mod alphabet;
 
+#[cfg(feature="sound")]
 pub use sound::{Sound, VoiceLevel};
+#[cfg(feature="word")]
 pub use word::{Word, PartOfSpeech};
+#[cfg(feature="dictionary")]
 pub use dictionary::{
 	Dictionary,
 	Words,
@@ -161,5 +170,7 @@ pub use dictionary::{
 	DictIter,
 	DictIterMut
 };
+#[cfg(feature="language")]
 pub use language::Language;
+#[cfg(feature="rule")]
 pub use rule::Rule;

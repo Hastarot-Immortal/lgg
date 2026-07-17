@@ -27,15 +27,19 @@ pub use cc_traits::{
 	MapIterMut,
 };
 
+#[cfg(feature="fastmap")]
 use foldhash::{
     HashMap,
     HashMapExt,
 };
+
+#[cfg(feature="fastmap")]
 use std::{
     hash::Hash,
     ops::{ Deref, DerefMut },
 };
 
+#[cfg(feature="fastmap")]
 pub struct FastMap<K, V> {
     base: HashMap<K, V>,
 }

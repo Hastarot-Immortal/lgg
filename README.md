@@ -1,6 +1,6 @@
-# lgg_core
+# lgg
 
-`lgg_core` is a structural linguistic engine and phonetic framework designed for building programmatic dictionary systems, simulating conlangs (constructed languages), and applying deterministic sound change rules.
+`lgg` is a structural linguistic engine and phonetic framework designed for building programmatic dictionary systems, simulating conlangs (constructed languages), and applying deterministic sound change rules.
 
 ## Core Architecture
 
@@ -18,8 +18,8 @@ The framework is structured into several interconnected modules:
 ## Example
 
 ``` rust
-use lgg_core::*;
-use lgg_core::language::*;
+use lgg::*;
+use lgg::language::*;
 
 struct CustomLB {
 	rules: Vec<Box<dyn Rule>>,
@@ -146,5 +146,5 @@ fn main() {
 Add to your Cargo.toml:
 ``` toml
 [dependencies]
-lgg_core = { git = "https://github.com/Hastarot-Immortal/lgg-core.git", package = "lgg-core" }
+lgg = { git = "https://github.com/Hastarot-Immortal/lgg.git"}
 ```

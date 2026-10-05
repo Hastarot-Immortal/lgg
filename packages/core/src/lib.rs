@@ -155,8 +155,6 @@ pub mod language;
 pub mod rule;
 #[cfg(feature="dictionary")]
 pub mod collections;
-#[cfg(feature="alphabet")]
-pub mod alphabet;
 
 #[cfg(feature="sound")]
 pub use sound::{Sound, VoiceLevel};

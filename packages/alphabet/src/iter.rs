@@ -3,11 +3,11 @@ use std::{
     vec::IntoIter as VecIntoIter,
     slice::Iter as SliceIter,
 };
-use crate::{
+use lgg_core::{
     Sound, 
     VoiceLevel,
-    alphabet::Alphabet,
 };
+use crate::alphabet::Alphabet;
 
 /// An owned iterator that consumes an [`Alphabet`] and yields its [`Sound`] tokens.
 pub struct IntoIter {
@@ -130,7 +130,8 @@ impl<'a> IntoIterator for &'a mut Indexes {
 /// # Example
 ///
 /// ```
-/// use lgg_core::{VoiceLevel::*, alphabet::VoiceLevelSet};
+/// use lgg_core::VoiceLevel::*;
+/// use lgg_alphabet::VoiceLevelSet;
 ///
 /// let mut vl_set = VoiceLevelSet::ALL - Sonorant;
 /// vl_set &= [Sonorant, Vowel, Voice];

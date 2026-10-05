@@ -7,7 +7,7 @@
 //! # Examples
 //!
 //! ```
-//! use lgg_core::alphabet::{Alphabet, Indexes, VoiceLevelSet};
+//! use lgg_alphabet::{Alphabet, Indexes, VoiceLevelSet};
 //! use lgg_core::{Sound, VoiceLevel};
 //!
 //! // Instantiating a framework pool of phonetic sounds
@@ -30,10 +30,16 @@ pub use alphabet::Alphabet;
 pub use iter::{IntoIter, Iter, Indexes, VoiceLevelSet};
 pub use index::{AlphabetIndex, AlphabetIndexOwned};
 
+/// Allows a builder to accept an explicit phonetic `Alphabet` specification object.
+pub trait WithAlphabet {
+    /// Configures the language builder framework to draw parameters from the given target alphabet.
+    fn alphabet<A: Into<crate::alphabet::Alphabet>>(self, alphabet: A) -> Self;
+}
+
 #[cfg(test)]
 mod alphabet_test {
     use super::*;
-    use crate::{Sound, VoiceLevel::*};
+    use lgg_core::{Sound, VoiceLevel::*};
     use std::sync::LazyLock;
 
     static ALPHABET: LazyLock<Alphabet> = LazyLock::new(|| {

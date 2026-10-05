@@ -179,13 +179,6 @@ pub trait WithSeed {
 	fn seed(self, seed: Self::Seed) -> Self;
 }
 
-/// Allows a builder to accept an explicit phonetic `Alphabet` specification object.
-#[cfg(feature="alphabet")]
-pub trait WithAlphabet {
-    /// Configures the language builder framework to draw parameters from the given target alphabet.
-    fn alphabet<A: Into<crate::alphabet::Alphabet>>(self, alphabet: A) -> Self;
-}
-
 /// A trait for extending an already existing [`Language`] with a set of new words.
 pub trait LanguageExtender<T, M=DefaultMap<T, Word>> {
     /// Evaluates or creates words out of the raw entries iterator, appending results in-place into the target language.

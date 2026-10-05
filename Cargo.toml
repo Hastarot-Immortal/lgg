@@ -1,18 +1,12 @@
-[package]
-name = "lgg-core"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+resolver = "2"
+members = [
+  "packages/core",
+  "packages/alphabet"
+]
 
-[features]
-default = ["language", "rule", "fastmap"]
-sound = []
-word = ["sound"]
-rule = ["word"]
-dictionary = ["word", "dep:cc-traits"]
-fastmap = ["word", "dep:foldhash"]
-language = ["dictionary"]
-alphabet = ["sound"]
+[workspace.package]
+version = "0.1.2"
 
-[dependencies]
-cc-traits = {version="2.0.0", optional=true}
-foldhash = {version="0.2.0", optional=true}
+[workspace.dependencies]
+lgg-core = { version = "0.1.1", path = "packages/core" }

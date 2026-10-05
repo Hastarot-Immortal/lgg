@@ -1,8 +1,8 @@
 use crate::{
-    alphabet::{
-        iter::{Indexes, VoiceLevelSet},
-        index::{AlphabetIndex, AlphabetIndexOwned},
-    },
+    iter::{Indexes, VoiceLevelSet},
+    index::{AlphabetIndex, AlphabetIndexOwned},
+};
+use lgg_core::{
     Sound,
     sound::{AsBytesForSound, TryAsBytesForSound},
 };
@@ -14,7 +14,8 @@ use std::ops::Index;
 /// a reliable system for indexing, bulk lookups, and phonetic classification filtering.
 ///
 /// ```
-/// use lgg_core::{alphabet::Alphabet, Sound};
+/// use lgg_core::Sound;
+/// use lgg_alphabet::Alphabet;
 ///
 /// let alphabet = Alphabet::from([
 ///     Sound::vowel('a'),
@@ -57,7 +58,8 @@ impl Alphabet {
     /// Returns [`None`] if the target index pattern is out of bounds or the sound is missing.
     ///
     /// ```
-    /// use lgg_core::{alphabet::Alphabet, Sound};
+    /// use lgg_core::Sound;
+    /// use lgg_alphabet::Alphabet;
     ///
     /// let alphabet = Alphabet::from([Sound::vowel('a')]);
     /// 
@@ -73,7 +75,8 @@ impl Alphabet {
     /// Returns [`None`] if any part of the target index sequence falls out of bounds.
     ///
     /// ```
-    /// use lgg_core::{alphabet::Alphabet, Sound};
+    /// use lgg_core::Sound;
+    /// use lgg_alphabet::Alphabet;
     ///
     /// let alphabet = Alphabet::from([Sound::vowel('a'), Sound::sonorant('m')]);
     /// let indexes = alphabet.indexes();
@@ -88,7 +91,8 @@ impl Alphabet {
     /// Returns the total number of unique phonetic sounds present in the alphabet.
     ///
     /// ```
-    /// use lgg_core::{alphabet::Alphabet, Sound};
+    /// use lgg_core::Sound;
+    /// use lgg_alphabet::Alphabet;
     ///
     /// let alphabet = Alphabet::from([Sound::vowel('e')]);
     /// assert_eq!(alphabet.len(), 1);
@@ -100,7 +104,7 @@ impl Alphabet {
     /// Returns `true` if the alphabet contains no phonetic sounds.
     ///
     /// ```
-    /// use lgg_core::alphabet::Alphabet;
+    /// use lgg_alphabet::Alphabet;
     ///
     /// let alphabet = Alphabet::from([]);
     /// assert!(alphabet.is_empty());
@@ -112,7 +116,8 @@ impl Alphabet {
     /// Generates a comprehensive collection of numerical position keys tracking every element inside this alphabet.
     ///
     /// ```
-    /// use lgg_core::{alphabet::Alphabet, Sound};
+    /// use lgg_core::Sound;
+    /// use lgg_alphabet::Alphabet;
     ///
     /// let alphabet = Alphabet::from([Sound::vowel('a'), Sound::vowel('i')]);
     /// let indexes = alphabet.indexes();
@@ -128,7 +133,8 @@ impl Alphabet {
     /// Scans the alphabet pool using a closure predicate, collecting matching position indices.
     ///
     /// ```
-    /// use lgg_core::{alphabet::Alphabet, Sound, VoiceLevel};
+    /// use lgg_core::{Sound, VoiceLevel};
+    /// use lgg_alphabet::Alphabet;
     ///
     /// let alphabet = Alphabet::from([Sound::vowel('a'), Sound::voiceless('t')]);
     /// let vowels = alphabet.indexes_by(|s| s.voice_level() == VoiceLevel::Vowel);
@@ -151,7 +157,8 @@ impl Alphabet {
     /// Useful for isolating sound profiles such as matching all vowels or sonorants in one sweep.
     ///
     /// ```
-    /// use lgg_core::{alphabet::Alphabet, Sound, VoiceLevel};
+    /// use lgg_core::{Sound, VoiceLevel};
+    /// use lgg_alphabet::Alphabet;
     ///
     /// let alphabet = Alphabet::from([Sound::vowel('a'), Sound::sonorant('m'), Sound::voiceless('s')]);
     /// let targets = alphabet.indexes_by_voice_level([VoiceLevel::Vowel, VoiceLevel::Sonorant]);
